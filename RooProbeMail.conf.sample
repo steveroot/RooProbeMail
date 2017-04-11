@@ -1,0 +1,18 @@
+# This is a yaml formatted configuration file
+# Update these values and save as RooProbeMail.conf
+# then run the script;
+#  "ruby get_envelopes_into_db.rb"
+# to collect email envelopes into a sqlite database
+# Note you will be prompted as to whether you want
+# to get all envelopes or a few for a trial run.
+# Once you have the database, you can analyse it
+#  "ruby analyse.rb"
+
+config:
+  server: imap.gmail.com
+  ssl: true
+  user: you@example.com
+  password: yourpassword
+  sqlitedb: envelopes.db   #The default name of the database
+
+

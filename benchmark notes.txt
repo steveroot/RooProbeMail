@@ -1,0 +1,14 @@
+From Digital Ocean VPS 8GB memory/4 core server
+Process information:
+number emails: 101515
+number seconds: 306
+
+From Digital Ocean VPS 0.5GB memory/1 core server
+Process information:
+number emails: 101516
+number seconds: 856
+
+From Virtual Machine approx 7mbps ADSL, 4GB/2 core
+Process information:
+number emails: 101516
+number seconds: 492
