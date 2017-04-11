@@ -1,0 +1,7 @@
+# Ignore config files and database files
+# in case someone accidentally makes a pull
+# request that contains their email password
+# or database of email headers.
+
+RooProbeMail.conf
+*.db
