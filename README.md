@@ -23,7 +23,11 @@ I decided NOT to delete emails by code. That seems dangerous, so having identifi
 I wrote a small script in ruby to connect to gmail, get ALL of the email headers (date, sender, subject, size) and process them into a sqlite database file.
 Then I wrote another script in ruby to run queries against that database file.
 
-To use this yourself;
+To use this yourself you'll need 
+a) Ruby (I happen to be using 2.3.1) 
+b) a Gmail account.  I had to generate an app specific password to connect.
+
+# Steps to use
 0) Read the code - it won't take long and you can follow along to see that your password isn't being sent anywhere and your emails aren't being deleted. (It uses the imap command 'examine' which is read only, but don't take my word for it if you value your email).
 1) Download or clone these files into a directory on your computer.
 2) Open that directory, copy the file "RooProbeMail.conf.sample" to "RooProbeMail.conf".
@@ -31,6 +35,25 @@ To use this yourself;
 4) Run the "get_envelopes_into_db.rb" script. For me on linux, I use the terminal and type 'ruby get_envelopes_into_db.rb' 
 5) As the script runs, it will prompt you for whether you want to do a trial run of 30 days of emails. I'd suggest you do the trial first so you can see if there are any errors.
 6) Once the database has been completed, you can run 'ruby analyse.rb' to run some queries against the local database.  Currently this outputs to the screen. Eventually I'll make it write the output to a file.
+
+## Benchmarks
+I didn't do any performance optimisation - it worked well for me first time. However, I tried a few different devices and I believe that having enough memory is more important than a fast internet connection.  My 100,000 email headers created a sqlite database of just 40Mb.
+
+From Digital Ocean VPS 8GB memory/4 core server
+Process information:
+number emails: 101515
+number seconds: 306
+
+From Digital Ocean VPS 0.5GB memory/1 core server
+Process information:
+number emails: 101516
+number seconds: 856
+
+From Virtual Machine on my laptop, connected via approx 7mbps ADSL, 4GB memory/2 core
+Process information:
+number emails: 101516
+number seconds: 492
+
 
 ## Suggestions?
 You're welcome to add your own queries and make a pull request, or ask if you'd like a particular query written that you think others may benefit from.
