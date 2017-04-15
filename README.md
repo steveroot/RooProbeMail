@@ -24,8 +24,8 @@ I wrote a small script in ruby to connect to gmail, get ALL of the email headers
 Then I wrote another script in ruby to run queries against that database file.
 
 To use this yourself you'll need 
-a) Ruby (I happen to be using 2.3.1) 
-b) a Gmail account.  I had to generate an app specific password to connect.
++ Ruby (I happen to be using 2.3.1) 
++ a Gmail account.  I had to generate an app specific password to connect.
 
 # Steps to use
 0) Read the code - it won't take long and you can follow along to see that your password isn't being sent anywhere and your emails aren't being deleted. (It uses the imap command 'examine' which is read only, but don't take my word for it if you value your email).
@@ -39,20 +39,11 @@ b) a Gmail account.  I had to generate an app specific password to connect.
 ## Benchmarks
 I didn't do any performance optimisation - it worked well for me first time. However, I tried a few different devices and I believe that having enough memory is more important than a fast internet connection.  My 100,000 email headers created a sqlite database of just 40Mb.
 
-From Digital Ocean VPS 8GB memory/4 core server
-Process information:
-number emails: 101515
-number seconds: 306
+On a Digital Ocean VPS 8GB memory/4 core server, 101515 emails in 306 seconds
 
-From Digital Ocean VPS 0.5GB memory/1 core server
-Process information:
-number emails: 101516
-number seconds: 856
+On a Virtual Machine on my laptop, connected via approx 7mbps ADSL, 4GB memory/2 core, 101516 emails in 492 seconds
 
-From Virtual Machine on my laptop, connected via approx 7mbps ADSL, 4GB memory/2 core
-Process information:
-number emails: 101516
-number seconds: 492
+On a Digital Ocean VPS 0.5GB memory/1 core server, 101516 emails in 856 seconds
 
 
 ## Suggestions?
