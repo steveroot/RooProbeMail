@@ -5,9 +5,9 @@ I have too much email in my gmail. Too much as in I've consumed almost the entir
 ## What I tried
 
 I tried a number of ways of working out which emails I could delete to recover storage space but none quite did what I needed;
-IMAPSize - http://www.broobles.com/imapsize/ - came close to helping but is no longer in development. I think I tried it, I can't remember now.
-Mozilla Thunderbird - there was some way of viewing all the email, sorting by size, then deleting. It was slow and cumbersome. I gather there's a way of storing attachments offline using this but I didn't find that effective for my way of working.
-Gmails search - let me find and label emails over a certain size (10Mb) which helped identify some emails I could get rid of, but many I wanted to keep. It didn't help me find old newsletters and routine service emails that individually are small but build up to a noticable size.
++ IMAPSize - http://www.broobles.com/imapsize/ - came close to helping but is no longer in development. I think I tried it, I can't remember now.
++ Mozilla Thunderbird - there was some way of viewing all the email, sorting by size, then deleting. It was slow and cumbersome. I gather there's a way of storing attachments offline using this but I didn't find that effective for my way of working.
++ Gmails search - let me find and label emails over a certain size (10Mb) which helped identify some emails I could get rid of, but many I wanted to keep. It didn't help me find old newsletters and routine service emails that individually are small but build up to a noticable size.
 
 Eventually, I realised what I really wanted was to be able to get the details of the emails into a database so I could interogate it and find out more about my email. Questions like: 
 * Who has sent me the most emails
