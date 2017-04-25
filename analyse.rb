@@ -59,11 +59,11 @@ STDOUT.flush
 
 
 # A class for the queries and result display
-class Queries	
+class Queries
   def initialize(db,limit)
 	@db = db #SQLite3::Database.new "gmail_envelopes.db"
 	@limit = limit
-  	
+
   end
 
   def MailboxTotalSize
@@ -79,14 +79,14 @@ class Queries
     end
   puts "Total #{i/1024/1024} MB"
   puts ""
-  end	
+  end
 
-  def LargestEmails	
+  def LargestEmails
    puts "largest emails"
    puts '---------------------'
    puts "Date, MB, sender, subject"
    sql = "SELECT mail_date, mail_size/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from, mail_subject, mail_size
-	FROM emails 
+	FROM emails
 	ORDER BY mail_size DESC LIMIT #{@limit}"
    i=0
    @db.execute(sql) do |row|
@@ -95,14 +95,14 @@ class Queries
     end
   puts "Total #{i/1024/1024} MB"
   puts ""
-  end	
+  end
 
-  def LargestOlderThan12MonthsEmails	
+  def LargestOlderThan12MonthsEmails
    puts "largest emails more than 12 months old"
    puts '---------------------'
    puts "bytes, MB, sender, date, subject"
    sql = "SELECT mail_size as totalbytes, mail_size/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from, mail_date, mail_subject
-	FROM emails 
+	FROM emails
 	WHERE mail_date < date('now','-12 months')
 	ORDER BY mail_size DESC LIMIT #{@limit}"
    i=0
@@ -112,15 +112,14 @@ class Queries
     end
   puts "Total #{i/1024/1024} MB"
   puts ""
-puts sql
   end
 
-  def EmailsWithBadDates	
+  def EmailsWithBadDates
    puts "EmailsWithBadDates"
    puts '---------------------'
    puts "sender, date, subject"
    sql = "SELECT mail_from_mailbox||'@'||mail_from_host as mail_from, mail_date, mail_subject
-	FROM emails 
+	FROM emails
 	WHERE mail_date = date('1875-05-20')
 	ORDER BY mail_date DESC LIMIT #{@limit}"
    i=0
@@ -137,8 +136,8 @@ puts sql
    puts "largest sender by total mail size"
    puts '---------------------'
    puts "bytes, MB, sender"
-   sql = "SELECT sum(mail_size) as totalbytes, sum(mail_size)/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from 
-	FROM emails 
+   sql = "SELECT sum(mail_size) as totalbytes, sum(mail_size)/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from
+	FROM emails
 	GROUP BY mail_from ORDER BY sum(mail_size) DESC LIMIT #{@limit}"
    i=0
    @db.execute(sql) do |row|
@@ -147,7 +146,7 @@ puts sql
     end
   puts "Total #{i/1024/1024} MB"
   puts ""
-  end	
+  end
 
   def SenderLargestDomain
 
@@ -155,7 +154,7 @@ puts sql
   puts '---------------------'
   puts "bytes, MB, sender domain"
 sql = "SELECT sum(mail_size) as totalbytes, sum(mail_size)/1024/1024 as MB, '@'||mail_from_host as mail_from_domain
-	FROM emails 
+	FROM emails
 	GROUP BY mail_from_domain ORDER BY sum(mail_size) DESC LIMIT #{@limit}"
   i=0
   @db.execute(sql) do |row|
@@ -164,15 +163,15 @@ sql = "SELECT sum(mail_size) as totalbytes, sum(mail_size)/1024/1024 as MB, '@'|
   end
   puts "Total #{i/1024/1024} MB"
   puts ""
-  end	
+  end
 
   def SenderMostProlific
 
    puts "most prolific senders"
    puts "count, size MB, sender"
    puts '---------------------'
-   sql = "SELECT count(mail_from_mailbox||'@'||mail_from_host) as mail_count, sum(mail_size)/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from 
-	FROM emails 
+   sql = "SELECT count(mail_from_mailbox||'@'||mail_from_host) as mail_count, sum(mail_size)/1024/1024 as MB, mail_from_mailbox||'@'||mail_from_host as mail_from
+	FROM emails
 	GROUP BY mail_from ORDER BY count(mail_from_mailbox||'@'||mail_from_host) DESC LIMIT #{@limit}"
   i = 0
   @db.execute(sql) do |row|
@@ -209,4 +208,3 @@ db.close
 
 puts ""
 puts "Analysis Complete"
-
