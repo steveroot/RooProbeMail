@@ -14,5 +14,4 @@ config:
   user: you@example.com
   password: yourpassword
   sqlitedb: envelopes.db   #The default name of the database
-
-
+  results: results.txt #The default name of the results file
