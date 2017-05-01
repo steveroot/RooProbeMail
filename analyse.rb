@@ -160,7 +160,7 @@ class Queries
      @var = @var +   "#{row[0]}, #{row[1]}, #{row[2]}\n"
      i = i+1
     end
-  @var = @var +  "Found #{i} emails"
+  @var = @var +  "Found #{i} emails\n"
   @var = @var +  "\n"
   puts @var
   return @var
@@ -223,6 +223,37 @@ sql = "SELECT sum(mail_size) as totalbytes, sum(mail_size)/1024/1024 as MB, '@'|
   return @var
   end
 
+  def SimilarTitles_count
+   @var = "Similar titles - highest number of emails\n"
+   @var = @var +  "Emails where the subjects begin with the same 12 characters\n"
+   @var = @var +  "count, subject begins, size(MB)\n"
+   @var = @var + "---------------------\n"
+   sql = "SELECT substr(mail_subject,1,12), count(substr(mail_subject,1,12)) as counted, sum(mail_size)/1024/1024 as MB
+	FROM emails
+	GROUP BY substr(mail_subject,1,12) ORDER BY counted DESC LIMIT #{@limit}"
+  @db.execute(sql) do |row|
+    @var = @var +   "#{row[1]}, #{row[0]}, #{row[2]}\n"
+  end
+  @var = @var +  "\n"
+  puts @var
+  return @var
+  end
+  def SimilarTitles_size
+   @var = "Similar titles - largest total size\n"
+   @var = @var +  "Emails where the subjects begin with the same 12 characters\n"
+   @var = @var +  "count, subject begins, size(MB)\n"
+   @var = @var + "---------------------\n"
+   sql = "SELECT substr(mail_subject,1,12), count(substr(mail_subject,1,12)) as counted, sum(mail_size)/1024/1024 as sizedmb
+  FROM emails
+  GROUP BY substr(mail_subject,1,12) ORDER BY sizedmb DESC LIMIT #{@limit}"
+  @db.execute(sql) do |row|
+    @var = @var +   "#{row[1]}, #{row[0]}, #{row[2]}\n"
+  end
+  @var = @var +  "\n"
+  puts @var
+  return @var
+  end
+
 end
 
 #db.close
@@ -245,6 +276,8 @@ q = Queries.new(db,limit)
 @keepoutput << q.LargestEmails
 @keepoutput << q.LargestOlderThan12MonthsEmails
 @keepoutput << q.EmailsWithBadDates
+@keepoutput << q.SimilarTitles_count
+@keepoutput << q.SimilarTitles_size
 
 
 #we should close the db connection
